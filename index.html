@@ -6,43 +6,19 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Hello Triangle!</title>
-        <script src="main.js" type="module"></script>
-        <style>
-html, head, body {
-    margin: 0;
-    padding: 25px;
-    background-color: #2a2a2a;
-}
+        <link rel="stylesheet" href="styles.css">
+        <script src="utils/showError.js" defer ></script>
+        <script src="utils/webglContext.js" defer ></script>
 
-      #IDcanvas {
-          width: 800px;
-          height: 800px;
+        <!-- add extra scripts between here -->
 
-          /*
-           * WebGL trick: pick an offensive canvas background color to test
-           *  opacity/clearing bugs
-           */
-          background-color: #da6052;
+        <script src="vertices/verticesTriangle.js" defer></script>
+        <script src="buffers/buffer.js" defer></script>
 
-          /* Help to illustrate the rasterizer's job: when artificially lowering resolution, show pixelated image */
-          image-rendering: crisp-edges;
-      }
+        <!-- and here -->
 
-      /** CSS to make a nice little error box output for debugging (nice if you can't use devtools, e.g. mobile)  */
-      #error-box {
-          color: #fd8080;
-          font-weight: 500;
-          font-size: 18pt;
-          border: 1px solid white;
-          padding: 25px;
-          margin-top: 20px;
-      }
+        <script src="main.js" type="module" defer ></script>
 
-      .error-box-title {
-          color: #eee;
-          border-bottom: 1px solid gray;
-      }
-        </style>
     </head>
     <body>
         <canvas id="IDcanvas" width="800px" height="800px">

@@ -1,45 +1,24 @@
-function showError(errorText) {
-    const errorBoxDiv = document.getElementById('error-box');
-    const errorSpan = document.createElement('p');
-    errorSpan.innerText = errorText;
-    errorBoxDiv.appendChild(errorSpan);
-    console.error(errorText);
-}
 
 showError("Hello Test error 1");
 
 function helloTriangle(){
-    const canvas  = document.getElementById("IDcanvas");
-    if (!canvas){
-        showError("Can't find canvas reference");
-        return;
-    }
-    const gl = canvas.getContext('webgl2');
-    if (!gl){
-        showError("Can't find webgl2 support");
-        return;
-    }
-    
-    const triangleVertices = [
+
+    const verticesTriangle = [
         0.0, 0.5,
         -0.5, -0.5,
         0.5, -0.5
     ];
-    
-    const triangleVerticesCpuBuffer = new Float32Array(triangleVertices);
 
-    const triangleGeoBuffer = gl.createBuffer();
-    gl.bindBuffer(gl.ARRAY_BUFFER, triangleGeoBuffer);
-    gl.bufferData(gl.ARRAY_BUFFER, triangleVerticesCpuBuffer, gl.STATIC_DRAW);
+    const triangleGeoBuffer = createBuffer(verticesTriangle);
 
     const vertexShaderSourceCode = `
     precision mediump float;
-    
+
     attribute vec3 vertexPosition;
 
     void main() {
-    
-       gl_Position = vec4(vertexPosition, 1.0);
+
+        gl_Position = vec4(vertexPosition, 1.0);
 
     }`;
 
@@ -49,8 +28,8 @@ function helloTriangle(){
 
     if (!gl.getShaderParameter(vertexShader, gl.COMPILE_STATUS)){
         const compileError = gl.getShaderInfoLog(vertexShader);
-            showError('compile vertex error: ' + compileError);
-                return;
+        showError('compile vertex error: ' + compileError);
+        return;
     }
 
     const fragmentShaderSourceCode = `
@@ -67,8 +46,8 @@ function helloTriangle(){
 
     if (!gl.getShaderParameter(fragmentShader, gl.COMPILE_STATUS)){
         const compileError = gl.getShaderInfoLog(fragmentShader);
-            showError('compile fragment error: ' + compileError);
-                return;
+        showError('compile fragment error: ' + compileError);
+        return;
     }
 
     const triangleShaderProgram = gl.createProgram();
@@ -78,19 +57,19 @@ function helloTriangle(){
     gl.linkProgram(triangleShaderProgram);
     if (!gl.getProgramParameter(triangleShaderProgram, gl.LINK_STATUS)){
         const linkError = gl.getProgramInfoLog(triangleShaderProgram);
-            showError('link program error:'+ linkError);
-                return;
+        showError('link program error:'+ linkError);
+        return;
     }
 
     const vertexPositionAttributLocation = gl.getAttribLocation(triangleShaderProgram, 'vertexPosition');
     if (vertexPositionAttributLocation < 0) {
         showError('failed to get attribute location for vertexPosition');
-            return;
+        return;
     }
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
 
-    gl.clearColor(0,0,0,1);
+    gl.clearColor(0,0.1,0,1);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.useProgram(triangleShaderProgram);
