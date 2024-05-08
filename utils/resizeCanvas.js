@@ -1,0 +1,25 @@
+window.addEventListener('resize', resizeCanvas, false);
+
+function resizeCanvas() {
+    var canvas = document.getElementById('IDcanvas');
+    var windowWidth = window.innerWidth;
+    var windowHeight = window.innerHeight;
+    var windowRatio = windowWidth / windowHeight;
+    var canvasRatio = 16 / 9; // Aspect ratio of the canvas
+
+    if (windowRatio < canvasRatio) {
+        // Height is the limiting factor
+        var canvasHeight = Math.max(windowHeight * 0.7, 400);
+        var canvasWidth = canvasHeight * canvasRatio;
+    } else {
+        // Width is the limiting factor
+        var canvasWidth = windowWidth * 0.7;
+        var canvasHeight = canvasWidth / canvasRatio;
+    }
+
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasHeight + 'px';
+}
+
+// Call the function initially to set the canvas size
+resizeCanvas();

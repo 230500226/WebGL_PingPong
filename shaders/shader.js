@@ -1,4 +1,4 @@
-const vertexShaderSourceCode = `
+window.vertexShaderSourceCode = `
 precision mediump float;
 
 attribute vec3 vertexPosition;
@@ -9,11 +9,9 @@ void main() {
 
 }`;
 
-const fragmentShaderSourceCode = `
+window.fragmentShaderSourceCode = `
 precision mediump float;
 
 void main() {
     gl_FragColor = vec4(0.8,0,0,1);
 }`;
-
-export {vertexShaderSourceCode, fragmentShaderSourceCode}

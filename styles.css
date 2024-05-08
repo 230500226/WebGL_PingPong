@@ -5,10 +5,10 @@ html, head, body {
 }
 
 #IDcanvas {
-    width: 400px;
-    height: 400px;
-  //  background-color: darkpurple;
-  //not using since triangle render gets placed randomly on canvas and axies get confused
+    width: 70vw; 
+    height: 70vh;
+    //  background-color: darkpurple;
+    //not using since triangle render gets placed randomly on canvas and axies get confused
 }
 
 #error-box {

@@ -9,11 +9,24 @@
         <link rel="stylesheet" href="styles.css">
         <script src="utils/showError.js" defer ></script>
         <script src="utils/webglContext.js" defer ></script>
+        <script src="utils/resizeCanvas.js" defer ></script>
 
         <!-- add extra scripts between here -->
-
+        <!-- vertices -->
         <script src="vertices/verticesTriangle.js" defer></script>
+        <script src="vertices/verticesSquare.js" defer></script>
+
+        <!-- shaders -->
+        <script src="shaders/shader.js" defer></script>
+
+        <!-- buffers -->
         <script src="buffers/buffer.js" defer></script>
+
+        <!-- program -->
+        <script src="progCreate/progCreate.js" defer></script>
+
+        <!-- locations -->
+        <script src="locations/attribLocation.js" defer></script>
 
         <!-- and here -->
 
@@ -21,15 +34,10 @@
 
     </head>
     <body>
-        <canvas id="IDcanvas" width="800px" height="800px">
-            <!-- This message shows up only if the Canvas element isn't supported -->
-            HTML5 canvas not supported in your browser! These demos will not work.
+        <canvas id="IDcanvas" width="70vw" height="70vh"> <!--This is applied here to avoid bugginess but all other css is found in the styles.css-->
+            Canvas not FOUND?! you only see this if its not found so yeah, are you using internet explorer or something? ha its 3:12AM lol
         </canvas>
 
-        <!--
-            Doing a little error output in the HTML is nice when testing on mobile,
-            where you don't have access to console.log.
-        -->
         <div id="error-box">
             <span class="error-box-title">Error messages, if any, go in here.</span>
         </div>
