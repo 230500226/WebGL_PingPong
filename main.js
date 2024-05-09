@@ -3,24 +3,24 @@ showError("Hello Test error 1"); // global showError function
 function helloPingPong(){
 
     // Creating buffers for the vertices in the vertex shader
-    const squareGeoBuffer = createBuffer(verticesSquare);
-    const square2GeoBuffer = createBuffer(verticesSquare2);
-    const square3GeoBuffer = createBuffer(verticesSquare3);
+    const redGeoBuffer = createBuffer(verticesRed);
+    const blueGeoBuffer = createBuffer(verticesBlue);
+    const fourGeoBuffer = createBuffer(verticesFour);
 
     // Creating shader programs for each shape
-    createShaderProgram(vertexShaderSourceCode, fragmentShaderSourceCode,'squareShaderProgram');
-    createShaderProgram(vertexShaderSourceCode, fragmentShaderSourceCode,'square2ShaderProgram');
-    createShaderProgram(vertexShaderSourceCode, fragmentShaderSourceCode,'square3ShaderProgram');
+    createShaderProgram(vertexShaderSourceCode, fragmentShaderSourceCode,'redShaderProgram');
+    createShaderProgram(vertexShaderSourceCode, fragmentShaderSourceCode,'blueShaderProgram');
+    createShaderProgram(vertexShaderSourceCode, fragmentShaderSourceCode,'fourShaderProgram');
 
     // Getting the locations of the attributes for each shape
-    const squareVertAtribLoc = utilAttribLocation('squareShaderProgram','vertexPosition');
-    const square2VertAtribLoc = utilAttribLocation('square2ShaderProgram','vertexPosition');
-    const square3VertAtribLoc = utilAttribLocation('square3ShaderProgram','vertexPosition');
+    const redVertAtribLoc = utilAttribLocation('redShaderProgram','vertexPosition');
+    const blueVertAtribLoc = utilAttribLocation('blueShaderProgram','vertexPosition');
+    const fourVertAtribLoc = utilAttribLocation('fourShaderProgram','vertexPosition');
 
 
     // Setting up textures
     createBuffer(verticesRedTex);
-    const texCoordRedAtribLoc = utilAttribLocation('squareShaderProgram', 'vertTexCoord');
+    const texCoordRedAtribLoc = utilAttribLocation('redShaderProgram', 'vertTexCoord');
     gl.vertexAttribPointer(texCoordRedAtribLoc,2,gl.FLOAT,false,0,0);
 
     // create texture for each shape
@@ -40,15 +40,15 @@ function helloPingPong(){
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         gl.viewport(0, 0, canvas.width, canvas.height);
 
-        // Set up and draw the square
-        gl.useProgram(squareShaderProgram);
-        gl.enableVertexAttribArray(squareVertAtribLoc);
+        // Set up and draw the red
+        gl.useProgram(redShaderProgram);
+        gl.enableVertexAttribArray(redVertAtribLoc);
         
         gl.enableVertexAttribArray(texCoordRedAtribLoc);
 
-        gl.bindBuffer(gl.ARRAY_BUFFER, squareGeoBuffer);
-        gl.vertexAttribPointer(squareVertAtribLoc,2,gl.FLOAT,false,0,0);
-        window.aspectRatio(squareShaderProgram);
+        gl.bindBuffer(gl.ARRAY_BUFFER, redGeoBuffer);
+        gl.vertexAttribPointer(redVertAtribLoc,2,gl.FLOAT,false,0,0);
+        window.aspectRatio(redShaderProgram);
 
         gl.bindTexture(gl.TEXTURE_2D, redTexture);
         gl.activeTexture(gl.TEXTURE0);
@@ -56,15 +56,15 @@ function helloPingPong(){
         gl.drawArrays(gl.TRIANGLES, 0,3); 
         gl.drawArrays(gl.TRIANGLES, 3,3); 
 
-        // Set up and draw the square2
-        gl.useProgram(square2ShaderProgram);
-        gl.enableVertexAttribArray(square2VertAtribLoc);
+        // Set up and draw the blue
+        gl.useProgram(blueShaderProgram);
+        gl.enableVertexAttribArray(blueVertAtribLoc);
         
         //gl.enableVertexAttribArray(texCoordRedAtribLoc);
 
-        gl.bindBuffer(gl.ARRAY_BUFFER, square2GeoBuffer);
-        gl.vertexAttribPointer(square2VertAtribLoc,2,gl.FLOAT,false,0,0);
-        window.aspectRatio(square2ShaderProgram);
+        gl.bindBuffer(gl.ARRAY_BUFFER, blueGeoBuffer);
+        gl.vertexAttribPointer(blueVertAtribLoc,2,gl.FLOAT,false,0,0);
+        window.aspectRatio(blueShaderProgram);
 
         gl.bindTexture(gl.TEXTURE_2D, blueTexture);
         gl.activeTexture(gl.TEXTURE0);
@@ -72,15 +72,15 @@ function helloPingPong(){
         gl.drawArrays(gl.TRIANGLES, 0,3); 
         gl.drawArrays(gl.TRIANGLES, 3,3); 
 
-        // Set up and draw the square3
-        gl.useProgram(square3ShaderProgram);
-        gl.enableVertexAttribArray(square3VertAtribLoc);
+        // Set up and draw the four
+        gl.useProgram(fourShaderProgram);
+        gl.enableVertexAttribArray(fourVertAtribLoc);
         
         //gl.enableVertexAttribArray(texCoordRedAtribLoc);
 
-        gl.bindBuffer(gl.ARRAY_BUFFER, square3GeoBuffer);
-        gl.vertexAttribPointer(square3VertAtribLoc,2,gl.FLOAT,false,0,0);
-        window.aspectRatio(square3ShaderProgram);
+        gl.bindBuffer(gl.ARRAY_BUFFER, fourGeoBuffer);
+        gl.vertexAttribPointer(fourVertAtribLoc,2,gl.FLOAT,false,0,0);
+        window.aspectRatio(fourShaderProgram);
 
         gl.bindTexture(gl.TEXTURE_2D, fourTexture);
         gl.activeTexture(gl.TEXTURE0);

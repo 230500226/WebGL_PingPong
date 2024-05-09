@@ -1,4 +1,4 @@
-window.verticesSquare = [
+window.verticesRed= [
     // Triangle 1
     1.45,-0.2, //bottom left
     1.45,0.2,   //top left
@@ -10,7 +10,7 @@ window.verticesSquare = [
     1.73,-0.2 //bottom right
 ];
 
-window.verticesSquare2 = [
+window.verticesBlue= [
     // Triangle 1
     -1.45,-0.2, //bottom left
     -1.45,0.2,   //top left
@@ -22,7 +22,7 @@ window.verticesSquare2 = [
     -1.73,-0.2 //bottom right
 ];
 
-window.verticesSquare3 = [
+window.verticesFour= [
     // Triangle 1
     0.06,-0.1, //bottom left
     0.06,0.1,   //top left
