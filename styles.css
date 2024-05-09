@@ -4,6 +4,11 @@ html, head, body {
     background-color: #2a2a2a;
 }
 
+#redCard, #blueCard, #fourCard, #bg{
+    width:0;
+    height:0;
+    display:none;
+}
 #IDcanvas {
     //  width: 400px;
     //  height: 400px;

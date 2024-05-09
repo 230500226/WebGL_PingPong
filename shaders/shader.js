@@ -3,13 +3,17 @@ precision mediump float;
 
 attribute vec3 vertexPosition;
 
+attribute vec2 vertTexCoord;
+varying vec2 fragTexCoord;
+
 uniform float u_aspectRatio;
 
 void main() {
     // This part essentially divides the x and y coordinates by the aspect ratio and 1.0 respectively to appear normal for any given aspect ratio. In this case 16:9
-
     vec2 scaledPosition = vertexPosition.xy / vec2(u_aspectRatio, 1.0);
     vec4 scaledAspectMatrix = vec4(scaledPosition, vertexPosition.z, 1.0);
+
+    fragTexCoord = vertTexCoord;
 
     gl_Position = scaledAspectMatrix;
 }`;
@@ -17,6 +21,9 @@ void main() {
 window.fragmentShaderSourceCode = `
 precision mediump float;
 
+varying vec2 fragTexCoord;
+uniform sampler2D sampler;
+
 void main() {
-    gl_FragColor = vec4(0.8,0,0,1);
+    gl_FragColor = texture2D(sampler, fragTexCoord);
 }`;
