@@ -2,24 +2,28 @@ showError("Hello Test error 1"); // global showError function
 
 function helloPingPong(){
 
+    // Creating buffers for the vertices in the vertex shader
     const squareGeoBuffer = createBuffer(verticesSquare);
     const square2GeoBuffer = createBuffer(verticesSquare2);
     const square3GeoBuffer = createBuffer(verticesSquare3);
-    createBuffer(verticesRedTex);
 
+    // Creating shader programs for each shape
     createShaderProgram(vertexShaderSourceCode, fragmentShaderSourceCode,'squareShaderProgram');
     createShaderProgram(vertexShaderSourceCode, fragmentShaderSourceCode,'square2ShaderProgram');
     createShaderProgram(vertexShaderSourceCode, fragmentShaderSourceCode,'square3ShaderProgram');
 
+    // Getting the locations of the attributes for each shape
     const squareVertAtribLoc = utilAttribLocation('squareShaderProgram','vertexPosition');
     const square2VertAtribLoc = utilAttribLocation('square2ShaderProgram','vertexPosition');
     const square3VertAtribLoc = utilAttribLocation('square3ShaderProgram','vertexPosition');
 
+
+    // Setting up textures
+    createBuffer(verticesRedTex);
     const texCoordRedAtribLoc = utilAttribLocation('squareShaderProgram', 'vertTexCoord');
-
-
     gl.vertexAttribPointer(texCoordRedAtribLoc,2,gl.FLOAT,false,0,0);
 
+    // create texture for each shape
     const redTexture = window.createTexture('redCard');
     const blueTexture = window.createTexture('blueCard');
     const fourTexture = window.createTexture('fourCard');
@@ -34,8 +38,6 @@ function helloPingPong(){
         // Clear the canvas
         gl.clearColor(0, 0.1, 0,0)
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
-        // Draw your scene
         gl.viewport(0, 0, canvas.width, canvas.height);
 
         // Set up and draw the square
