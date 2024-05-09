@@ -1,7 +1,6 @@
-
 showError("Hello Test error 1"); // global showError function
 
-function helloTriangle(){
+function helloPingPong(){
 
     const triangleGeoBuffer = createBuffer(verticesTriangle); // Calls the global createBuffer function
     const squareGeoBuffer = createBuffer(verticesSquare);
@@ -9,8 +8,8 @@ function helloTriangle(){
     createShaderProgram(vertexShaderSourceCode, fragmentShaderSourceCode, 'triangleShaderProgram');
     createShaderProgram(vertexShaderSourceCode, fragmentShaderSourceCode,'squareShaderProgram');
 
-    const triangleVertAtribLoc = getAttribLocation('triangleShaderProgram', 'vertexPosition');
-    const squareVertAtribLoc = getAttribLocation('squareShaderProgram','vertexPosition');
+    const triangleVertAtribLoc = utilAttribLocation('triangleShaderProgram', 'vertexPosition');
+    const squareVertAtribLoc = utilAttribLocation('squareShaderProgram','vertexPosition');
 
     // Need for setting pixel dimensions of the canvas to match display size
     canvas.width = canvas.clientWidth;
@@ -31,6 +30,9 @@ function helloTriangle(){
         gl.enableVertexAttribArray(triangleVertAtribLoc);
         gl.bindBuffer(gl.ARRAY_BUFFER, triangleGeoBuffer);
         gl.vertexAttribPointer(triangleVertAtribLoc,2,gl.FLOAT,false,0,0);
+
+            window.aspectRatio(triangleShaderProgram);
+
         gl.drawArrays(gl.TRIANGLES, 0,3);
 
         // Set up and draw the square
@@ -38,6 +40,9 @@ function helloTriangle(){
         gl.enableVertexAttribArray(squareVertAtribLoc);
         gl.bindBuffer(gl.ARRAY_BUFFER, squareGeoBuffer);
         gl.vertexAttribPointer(squareVertAtribLoc,2,gl.FLOAT,false,0,0);
+
+            window.aspectRatio(squareShaderProgram);
+
         gl.drawArrays(gl.TRIANGLE_FAN, 0,4); 
 
         // Request the next frame
@@ -47,7 +52,7 @@ function helloTriangle(){
 }
 
 try {
-    helloTriangle();
+    helloPingPong();
 } catch (e) {
     showError(`Uncaught JavaScript exception: ${e}`);
 }

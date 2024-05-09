@@ -1,4 +1,4 @@
-window.getAttribLocation = function(programName, attributeName) {
+window.utilAttribLocation = function(programName, attributeName) {
     const program = window[programName];
     const attributeLocation = gl.getAttribLocation(program, attributeName);
     if (attributeLocation < 0) {
