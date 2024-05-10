@@ -43,7 +43,7 @@ function helloPingPong(){
     // Initialize blue translation
     const uMatrixBlue = utilUniformLocation(blueShaderProgram, 'u_matrix');
     var upBlue = false, downBlue = false, leftBlue = false, rightBlue = false;
-    var yBlue = 0, xBlue = 0;
+    window.yBlue = 0; window.xBlue = 0;
     // keybindings for blue
     var upBlue = {value: false}, downBlue = {value: false};
     window.keyBindings('w', 's', upBlue, downBlue);
@@ -52,6 +52,7 @@ function helloPingPong(){
     const uMatrixFour = utilUniformLocation(fourShaderProgram, 'u_matrix');
     var upFour = false, downFour = false, leftFour = false, rightFour = false;
     var yFour = 0, xFour = 0;
+    window.fourShape = {x: 0, y: 0, up: false, down: false, left: false, right: false};
 
     function animate() {
         // Clear the canvas
@@ -72,9 +73,15 @@ function helloPingPong(){
         draw(blueShaderProgram, blueVertAtribLoc, blueGeoBuffer, null, blueTexture);
 
         // Draw four
-        var position = matrixTranslate(fourShaderProgram, uMatrixFour, upFour, downFour, leftFour, rightFour, xFour, yFour);
-        xFour = position.x;
-        yFour = position.y;
+        gl.useProgram(fourShaderProgram);
+        fourShape = window.bounce(fourShape, 0.9, {x: xRed, y: yRed}, {x: xBlue, y: yBlue});
+        var translationMatrix = [
+            1, 0, 0, 0,
+            0, 1, 0, 0,
+            0, 0, 1, 0,
+            fourShape.x, fourShape.y, 0, 1
+        ];
+        gl.uniformMatrix4fv(uMatrixFour, false, translationMatrix);
         draw(fourShaderProgram, fourVertAtribLoc, fourGeoBuffer, null, fourTexture);
 
         // Request the next frame
