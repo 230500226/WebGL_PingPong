@@ -8,6 +8,8 @@ varying vec2 fragTexCoord;
 
 uniform float u_aspectRatio;
 
+uniform mat4 u_matrix;
+
 void main() {
     // This part essentially divides the x and y coordinates by the aspect ratio and 1.0 respectively to appear normal for any given aspect ratio. In this case 16:9
     vec2 scaledPosition = vertexPosition.xy / vec2(u_aspectRatio, 1.0);
@@ -15,7 +17,7 @@ void main() {
 
     fragTexCoord = vertTexCoord;
 
-    gl_Position = scaledAspectMatrix;
+    gl_Position = u_matrix * scaledAspectMatrix;
 }`;
 
 window.fragmentShaderSourceCode = `

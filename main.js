@@ -32,69 +32,58 @@ function helloPingPong(){
     canvas.width = canvas.clientWidth;
     canvas.height = canvas.clientHeight;
 
-    function animate() {
-        // Update any state or variables here
+    // Initialize red translation
+    const uMatrixRed = utilUniformLocation(redShaderProgram, 'u_matrix');
+    var leftRed = false, rightRed = false;
+    var yRed = 0, xRed = 0;
+    // keybindings for red
+    var upRed = {value: false}, downRed = {value: false};
+    window.keyBindings('ArrowUp', 'ArrowDown', upRed, downRed);
 
+    // Initialize blue translation
+    const uMatrixBlue = utilUniformLocation(blueShaderProgram, 'u_matrix');
+    var upBlue = false, downBlue = false, leftBlue = false, rightBlue = false;
+    var yBlue = 0, xBlue = 0;
+    // keybindings for blue
+    var upBlue = {value: false}, downBlue = {value: false};
+    window.keyBindings('w', 's', upBlue, downBlue);
+
+    // Initialize four translation
+    const uMatrixFour = utilUniformLocation(fourShaderProgram, 'u_matrix');
+    var upFour = false, downFour = false, leftFour = false, rightFour = false;
+    var yFour = 0, xFour = 0;
+
+    function animate() {
         // Clear the canvas
         gl.clearColor(0, 0.1, 0,0)
         gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
         gl.viewport(0, 0, canvas.width, canvas.height);
 
-        // Set up and draw the red
-        gl.useProgram(redShaderProgram);
-        gl.enableVertexAttribArray(redVertAtribLoc);
-        
-        gl.enableVertexAttribArray(texCoordRedAtribLoc);
+        // Draw red
+        var position = matrixTranslate(redShaderProgram, uMatrixRed, upRed, downRed, leftRed, rightRed, xRed, yRed);
+        xRed = position.x;
+        yRed = position.y;
+        draw(redShaderProgram, redVertAtribLoc, redGeoBuffer, texCoordRedAtribLoc, redTexture);
 
-        gl.bindBuffer(gl.ARRAY_BUFFER, redGeoBuffer);
-        gl.vertexAttribPointer(redVertAtribLoc,2,gl.FLOAT,false,0,0);
-        window.aspectRatio(redShaderProgram);
+        // Draw blue
+        var position = matrixTranslate(blueShaderProgram, uMatrixBlue, upBlue, downBlue, leftBlue, rightBlue, xBlue, yBlue);
+        xBlue = position.x;
+        yBlue = position.y;
+        draw(blueShaderProgram, blueVertAtribLoc, blueGeoBuffer, null, blueTexture);
 
-        gl.bindTexture(gl.TEXTURE_2D, redTexture);
-        gl.activeTexture(gl.TEXTURE0);
+        // Draw four
+        var position = matrixTranslate(fourShaderProgram, uMatrixFour, upFour, downFour, leftFour, rightFour, xFour, yFour);
+        xFour = position.x;
+        yFour = position.y;
+        draw(fourShaderProgram, fourVertAtribLoc, fourGeoBuffer, null, fourTexture);
 
-        gl.drawArrays(gl.TRIANGLES, 0,3); 
-        gl.drawArrays(gl.TRIANGLES, 3,3); 
-
-        // Set up and draw the blue
-        gl.useProgram(blueShaderProgram);
-        gl.enableVertexAttribArray(blueVertAtribLoc);
-        
-        //gl.enableVertexAttribArray(texCoordRedAtribLoc);
-
-        gl.bindBuffer(gl.ARRAY_BUFFER, blueGeoBuffer);
-        gl.vertexAttribPointer(blueVertAtribLoc,2,gl.FLOAT,false,0,0);
-        window.aspectRatio(blueShaderProgram);
-
-        gl.bindTexture(gl.TEXTURE_2D, blueTexture);
-        gl.activeTexture(gl.TEXTURE0);
-
-        gl.drawArrays(gl.TRIANGLES, 0,3); 
-        gl.drawArrays(gl.TRIANGLES, 3,3); 
-
-        // Set up and draw the four
-        gl.useProgram(fourShaderProgram);
-        gl.enableVertexAttribArray(fourVertAtribLoc);
-        
-        //gl.enableVertexAttribArray(texCoordRedAtribLoc);
-
-        gl.bindBuffer(gl.ARRAY_BUFFER, fourGeoBuffer);
-        gl.vertexAttribPointer(fourVertAtribLoc,2,gl.FLOAT,false,0,0);
-        window.aspectRatio(fourShaderProgram);
-
-        gl.bindTexture(gl.TEXTURE_2D, fourTexture);
-        gl.activeTexture(gl.TEXTURE0);
-
-        gl.drawArrays(gl.TRIANGLES, 0,3); 
-        gl.drawArrays(gl.TRIANGLES, 3,3); 
         // Request the next frame
-        //requestAnimationFrame(animate);
+        requestAnimationFrame(animate);
     }
     animate();
 }
-
 try {
     helloPingPong();
 } catch (e) {
-    showError(`Uncaught JavaScript exception: ${e}`);
+    showError(`Nah bro Uncaught JavaScript exception: ${e}`);
 }
