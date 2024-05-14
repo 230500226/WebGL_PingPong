@@ -89,8 +89,35 @@ function helloPingPong(){
     }
     animate();
 }
-try {
-    helloPingPong();
-} catch (e) {
-    showError(`Nah bro Uncaught JavaScript exception: ${e}`);
-}
+
+document.getElementById('start-button').addEventListener('click', function() {
+    document.getElementById('start-div').style.display = 'none';
+    var countdown = 3;
+    var countdownDisplay = document.createElement('div');
+    countdownDisplay.id = 'countdown';
+    countdownDisplay.style.position = 'fixed';
+    countdownDisplay.style.top = '50%';
+    countdownDisplay.style.left = '50%';
+    countdownDisplay.style.transform = 'translate(-50%, -50%)';
+    countdownDisplay.style.fontSize = '50px';
+    countdownDisplay.style.color = 'white';
+    document.body.appendChild(countdownDisplay);
+
+    var countdownInterval = setInterval(function() {
+        if (countdown > 0) {
+            countdownDisplay.textContent = countdown;
+            countdown--;
+        } else if (countdown === 0) {
+            countdownDisplay.textContent = 'GO!';
+            countdown--;
+        } else {
+            clearInterval(countdownInterval);
+            document.body.removeChild(countdownDisplay);
+            try {
+                helloPingPong();
+            } catch (e) {
+                showError(`Nah bro Uncaught JavaScript exception: ${e}`);
+            }
+        }
+    }, 1000);
+});

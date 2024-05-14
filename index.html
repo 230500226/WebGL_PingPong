@@ -49,11 +49,22 @@
     </head>
     <body>
         <canvas id="IDcanvas" > 
-            Canvas not FOUND?! you only see this if its not found so yeah, are you using internet explorer or something? ha its 3:12AM lol
+            Canvas not FOUND?! you only see this if its not found so yeah, are you using internet explorer or something? ha its 3AM lol
         </canvas>
-
-        <div id="error-box">
-            <span class="error-box-title">Error messages, if any, go in here.</span>
-        </div>
+            <div id="scoreboard">
+                <span id="red-score">0</span> - <span id="blue-score">0</span>
+            </div>
+            <div id="error-box">
+                <span class="error-box-title">Error messages, if any, go in here.</span>
+            </div>
+            <div id="start-div">
+                <div id="instructions">
+                    <h2>Welcome to Ping Pong!</h2>
+                    <p>Red card: Press up and down arrows to move up and down</p>
+                    <p>Blue card: Press W and S keys to move up and down</p>
+                    <p>Press start to play!</p>
+                </div>
+                <button id="start-button">Start</button>
+            </div>
     </body>
 </html>
