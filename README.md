@@ -6,7 +6,7 @@ Welcome to the WebGL_PingPong project! This is a fun and exciting ping pong game
 
 ## Project Description
 
-The goal of this project was to recreate the classic game of Ping Pong using modern web technologies. We leveraged the power of WebGL for rendering 3D graphics and JavaScript for implementing game logic. The game has been successfully developed and is now complete.
+The goal of this project was to recreate the classic game of Ping Pong using modern web technologies. I leveraged the power of WebGL for rendering 3D graphics and JavaScript for implementing game logic. The game has been successfully developed and is now complete.
 
 ## Current Status
 
